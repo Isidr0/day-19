@@ -3,7 +3,8 @@ from turtle import Turtle, Screen
 tim = Turtle()
 screen = Screen()
 
-screen.listen()
+
+
 # Functions as inputs
 
 # Higher order functions are functions that can work with other functions.
@@ -18,25 +19,41 @@ screen.listen()
 
 # Create etch a sketch with wasd as movement keys.
 # Should be able to press both at once to move diagonally. Press c to clear.
+# w = forward s = backward a = counter-clockwise d = clockwise
+
+
+#allows scren to detect keyboard input
+screen.listen()
+
 def move_forward():
     tim.forward(10)
 
 def move_left():
-    tim.left(90)
+    # tim.left(10)
+    new_heading = tim.heading() + 10
+    tim.setheading(new_heading)
 
 def move_back():
-    tim.back(10)
+    tim.back(100)
 
 def move_right():
-    tim.right(90)
-    move_forward()
+    # tim.right(10)
+    new_heading = tim.heading() - 10
+    tim.setheading(new_heading)
 
-screen.onkey(key="w", fun=move_forward)
-screen.onkey(key="a", fun=move_left)
-screen.onkey(key="s", fun=move_back)
-screen.onkey(key="d", fun=move_right)
+def clear_screen():
+    tim.clear()
+    tim.penup()
+    tim.home()
+    tim.pendown()
 
+screen.onkeypress(key="w", fun=move_forward)
+screen.onkeypress(key="a", fun=move_left)
+screen.onkeypress(key="s", fun=move_back)
+screen.onkeypress(key="d", fun=move_right)
+screen.onkey(key="c", fun=clear_screen)
 
 
 screen.exitonclick()
+
 
